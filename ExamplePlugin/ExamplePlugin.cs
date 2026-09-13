@@ -11,6 +11,8 @@ namespace ExamplePlugin
         private static float rotationSpeed = 350.0f; // Multiplier adjusted for frame dragging
         private static bool isDragging = false;
         private static Vector3 lastMousePosition;
+
+        private static float defaultMenuAngleOffset = -35.0f;
         private static float totalRotationalOffset = 0f; // Global tracking angle accumulator
 
         private static float currentVelocity = 0f;
@@ -19,6 +21,8 @@ namespace ExamplePlugin
 
         public void Awake()
         {
+            totalRotationalOffset = defaultMenuAngleOffset;
+
             try
             {
                 var harmony = new Harmony("com.espadon.LobbyCharacterInspect");
@@ -93,7 +97,7 @@ namespace ExamplePlugin
             // Right-click instantly snaps all pedestal orientation offsets back to 0
             if (Input.GetMouseButtonDown(1))
             {
-                totalRotationalOffset = 0f;
+                totalRotationalOffset = defaultMenuAngleOffset;
                 currentVelocity = 0f;
             }
         }
